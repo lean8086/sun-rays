@@ -1,0 +1,11 @@
+body {
+	background-image: none;
+}
+
+.display {
+	background-image: -webkit-linear-gradient(top, #2B81C0 0%, #BEDCEF 100%);
+	background-image: -moz-linear-gradient(top, #2B81C0 0%, #BEDCEF 100%);
+	background-image: -ms-linear-gradient(top, #2B81C0 0%, #BEDCEF 100%);
+	background-image: -o-linear-gradient(top, #2B81C0 0%, #BEDCEF 100%);
+	background-image: linear-gradient(top, #2B81C0 0%, #BEDCEF 100%);
+}
