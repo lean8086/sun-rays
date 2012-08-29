@@ -1,48 +1,41 @@
 (function (window) {
-	"use strict";
+	'use strict';
 
 	/**
 	 * Helpers
 	 */
-	var document = window.document,
-		Math = window.Math,
+	var Math = window.Math,
+		// Get canvas element
+		canvas = window.document.querySelector('canvas'),
+		// Get canvas context
+		ctx = canvas.getContext('2d'),
+		// Grab the Canvas size
+		width = 900,
+		height = 400,
 
 	/**
-	 * Canvas Element creation
+	 * Properties
 	 */
-	// Create canvas element
-		canvas = document.querySelector("canvas"),
-	// Get canvas context
-		context = canvas.getContext("2d");
-
-	// Set canvas size
-	canvas.width = 900;
-	canvas.height = 500;
+		// Amount of rays
+		divisions = 12,
+		// Half of weight of each ray
+		halfRay = divisions / 75,
+		// Rotation in radians
+		radians = Math.PI * 2 / divisions;
 
 	/**
-	 * Rays creation
+	 * Methods
 	 */
-
-	function calcStripe(x, y, rotation) {
+	function calculateStripe(x, y, rotation) {
 		return {
-			"x": x + canvas.width * Math.cos(rotation),
-			"y": y + canvas.width * Math.sin(rotation)
+			'x': x + width * Math.cos(rotation),
+			'y': y + width * Math.sin(rotation)
 		};
 	}
 
-	function draw(fromX, fromY) {
-
-		// Set rgba color to stripes
-		context.fillStyle = "rgba(255, 255, 255, 0.035)";
-
+	function draw(centerX, centerY) {
 		// Rotation angle of each line
 		var angle = 0,
-		// Amount of rays
-			divisions = 12,
-		// Half og weight of each ray
-			halfRay = divisions / 75,
-		// Rotation in radians
-			radians = Math.PI * 2 / divisions,
 		// Index to iterate
 			i = divisions,
 		// Stripes references calculations
@@ -51,36 +44,31 @@
 
 		// Iteration of each ray
 		while (i) {
-
 			// Angle recalculation
 			angle = radians * i;
-
-			// Move context to "from" point
-			context.moveTo(fromX, fromY);
-
+			// Move context to 'from' point
+			ctx.moveTo(centerX, centerY);
 			// Get stripe from calculation
-			stripeLeft = calcStripe(fromX, fromY, angle - halfRay);
-			stripeRight = calcStripe(fromX, fromY, angle + halfRay);
-
+			stripeLeft = calculateStripe(centerX, centerY, angle - halfRay);
+			stripeRight = calculateStripe(centerX, centerY, angle + halfRay);
 			// Line to of context with calculated stripes
-			context.lineTo(stripeRight.x, stripeRight.y);
-			context.lineTo(stripeLeft.x, stripeLeft.y);
-			context.lineTo(fromX, fromY);
-			context.fill();
-
+			ctx.lineTo(stripeRight.x, stripeRight.y);
+			ctx.lineTo(stripeLeft.x, stripeLeft.y);
+			ctx.lineTo(centerX, centerY);
+			ctx.fill();
 			// Next iteration
 			i -= 1;
 		}
 	}
 
 	/**
-	 * Exports
-	 */
-	window.drawRays = draw;
-
-	/**
 	 * Initialization
 	 */
-	draw((canvas.width / 3) * 2, canvas.height);
+	window.onload = function () {
+		// Set rgba color to stripes on canvas
+		ctx.fillStyle = 'rgba(255, 255, 255, 0.035)';
+		// Draw stripes into canvas
+		draw(width / 2, height);
+	};
 
-}(window));
+}(this));

@@ -1,11 +1,8 @@
-body {
-	background-image: none;
-}
-
 .display {
-	background-image: -webkit-linear-gradient(top, #2B81C0 0%, #BEDCEF 100%);
-	background-image: -moz-linear-gradient(top, #2B81C0 0%, #BEDCEF 100%);
-	background-image: -ms-linear-gradient(top, #2B81C0 0%, #BEDCEF 100%);
-	background-image: -o-linear-gradient(top, #2B81C0 0%, #BEDCEF 100%);
-	background-image: linear-gradient(top, #2B81C0 0%, #BEDCEF 100%);
+	background-image: -webkit-linear-gradient(#2B81C0, #BEDCEF);
+	background-image: -moz-linear-gradient(#2B81C0, #BEDCEF);
+	background-image: -ms-linear-gradient(#2B81C0, #BEDCEF);
+	background-image: -o-linear-gradient(#2B81C0, #BEDCEF);
+	background-image: linear-gradient(#2B81C0, #BEDCEF);
+	box-shadow: 0 0 10px rgba(0, 0, 0, .2) inset;
 }
